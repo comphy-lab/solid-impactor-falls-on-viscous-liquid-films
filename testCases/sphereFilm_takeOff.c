@@ -42,15 +42,16 @@ double tmax, We, Ohd, Bo, Ohf, hf, Ec, De;
 char comm[80], restartFile[80], logFile[80];
 int main(int argc, char const *argv[]) {
 
-  MAXlevel = 8;
-  tmax = 4e0;
-  We = 1e0; // We is 1 for 0.167 m/s <816*0.167^2*0.00075/0.017>
-  Ohd = 1e0; // <0.000816/sqrt(816*0.017*0.00075) = 0.008>
-  Ec = 1e1;
-  De = 1e30; 
+  MAXlevel = 10;
 
-  Ohf = 0.1;
-  hf = 0.1;
+  tmax = 2e0;
+
+  We = 1e1; // We is 1 for 0.167 m/s <816*0.167^2*0.00075/0.017>
+  Ohd = 1e-2; // <0.000816/sqrt(816*0.017*0.00075) = 0.008>
+  Ec = 1e0;
+  De = 1e30;
+  Ohf = 1e0;
+  hf = 0.10;
 
   if (hf == 0){
     fprintf(ferr, "We have a problem. Wrong code. Change code or film height.\n");
@@ -62,16 +63,16 @@ int main(int argc, char const *argv[]) {
   X0=-hf; Y0=0.;
   init_grid (1 << (MINlevel));
 
-  rho1 = 1.0; mu1 = Ohd; 
-  G1 = Ec; lambda1 = De;
+  rho1 = 1.0; mu1 = Ohd/sqrt(We); 
+  G1 = Ec/We; lambda1 = De*sqrt(We);
   
-  rho2 = 1.0; mu2 = Ohf;
+  rho2 = 1.0; mu2 = Ohf/sqrt(We);
   G2 = 0.0; lambda2 = 0.0;
 
-  rho3 = 1e-2; mu3 = 1e-4; // to run things fast for now, we are not using the right density and viscosity ratio. It is advisable to use the navier-stokes/conserving.h for the correct air-water density ratio -- #TODO: fixme for production runs. 
+  rho3 = 1e-3; mu3 = 1e-4/sqrt(We); // to run things fast for now, we are not using the right density and viscosity ratio. It is advisable to use the navier-stokes/conserving.h for the correct air-water density ratio -- #TODO: fixme for production runs. 
   G3 = 0.0; lambda3 = 0.0;
 
-  f1.sigma = 1.0; f2.sigma = 1.0;
+  f1.sigma = 1e2/We; f2.sigma = 1.0/We;
 
   /*
   In the folder called "intermediate", we will store the snapshot files as the simulation progresses. See event: writingFiles.
@@ -95,9 +96,9 @@ event init(t = 0){
   if(!restore (file = "dump")){
     refine((R2Drop(x,y,z) < 1.44) && (level < MAXlevel));
     fraction (f1, 1. - R2Drop(x,y,z));
-    fraction (f2, -x);
+    fraction (f2, -(x-1e-2));
     foreach () {
-      u.x[] = -sqrt(We)*f1[];
+      u.x[] = -1e0*f1[];
       u.y[] = 0.0;
     }
   }

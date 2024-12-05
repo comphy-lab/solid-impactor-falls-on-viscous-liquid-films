@@ -1,8 +1,6 @@
 testCases/src-local
 .project_config
 **/_darcs
-testCases/*.ipynb
-testCases/*.py
 
 **/sphereFilm
 
@@ -33,11 +31,10 @@ testCases/*.py
 **/*.png
 
 # Custom executables (add your specific executable names here)
-getFacet2D
-getData-elastic-scalar
-pizza
-getData-elastic-scalar2D
-getX_Vjet
+**/getFacet-threePhase
+**/getData-elastic-scalar
+**/getData-elastic-scalar2D
+**/getX_Vjet
 
 # never exclude these files
 !*.c

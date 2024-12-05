@@ -3,6 +3,8 @@ testCases/src-local
 **/_darcs
 
 **/sphereFilm
+**/sphereFilm_takeOff
+**/sphereFilm_catch
 
 **/*.qcc*
 

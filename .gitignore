@@ -1,16 +1,54 @@
-# Prerequisites
-*.d
+testCases/src-local
+.project_config
+**/_darcs
+testCases/*.ipynb
+testCases/*.py
+
+**/sphereFilm
+
+**/*.qcc*
+
+## do not want to track any makefiles on remote. 
+**/*.tst
+**/*.s
+**/*.d*
+**/*.deps
+**/*.tags*
+**/*dump*
+**/*Dump*
+
+# basililsk specific files
+**/*.DS_Store
+**/*.html
+**/intermediate*
+**/log*.dat
+**/restart*
+**/*.tags*
+**/*.deps
+**/*.tests
+**/Video
+**/*.mp4
+**/*.json
+**/*.bv
+**/*.png
+
+# Custom executables (add your specific executable names here)
+getFacet2D
+getData-elastic-scalar
+pizza
+getData-elastic-scalar2D
+getX_Vjet
+
+# never exclude these files
+!*.c
+!*.h
+!*.sbatch
 
 # Object files
 *.o
 *.ko
 *.obj
 *.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
 
 # Precompiled Headers
 *.gch
@@ -50,3 +88,26 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# IDE/Editor folders
+.vscode/
+.idea/
+*.swp
+*~
+
+# Build directories
+build/
+bin/
+obj/
+
+# Dependency directories
+deps/
+
+# OS generated files
+**/*.DS_Store
+**/.DS_Store?
+**/._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

@@ -1,4 +1,0 @@
-/Users/vatsal/Library/CloudStorage/Dropbox/ProjectsOngoing/catchingImpactors/solid-impactor-falls-on-viscous-liquid-films/basilisk/src/grid/cartesian-common.h:911:7: warning: variable 'len' set but not used [-Wunused-but-set-variable]
-  911 |   int len = 0;
-      |       ^
-1 warning generated.

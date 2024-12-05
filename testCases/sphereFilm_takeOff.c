@@ -43,9 +43,7 @@ char comm[80], restartFile[80], logFile[80];
 int main(int argc, char const *argv[]) {
 
   MAXlevel = 10;
-
   tmax = 2e0;
-
   We = 1e1; // We is 1 for 0.167 m/s <816*0.167^2*0.00075/0.017>
   Ohd = 1e-2; // <0.000816/sqrt(816*0.017*0.00075) = 0.008>
   Ec = 1e0;

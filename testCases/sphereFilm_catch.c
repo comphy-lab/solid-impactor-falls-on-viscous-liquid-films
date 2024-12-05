@@ -42,13 +42,12 @@ double tmax, We, Ohd, Bo, Ohf, hf, Ec, De;
 char comm[80], restartFile[80], logFile[80];
 int main(int argc, char const *argv[]) {
 
-  MAXlevel = 8;
-  tmax = 4e0;
+  MAXlevel = 10;
+  tmax = 3e0;
   We = 1e1; // We is 1 for 0.167 m/s <816*0.167^2*0.00075/0.017>
   Ohd = 1e-2; // <0.000816/sqrt(816*0.017*0.00075) = 0.008>
   Ec = 1e0;
   De = 1e30; 
-
   Ohf = 1e0;
   hf = 1.00;
 

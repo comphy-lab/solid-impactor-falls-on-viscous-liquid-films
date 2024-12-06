@@ -89,7 +89,7 @@ Mkfile.old
 dkms.conf
 
 # IDE/Editor folders
-.vscode/
+# .vscode/
 .idea/
 *.swp
 *~

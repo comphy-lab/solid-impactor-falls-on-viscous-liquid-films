@@ -43,13 +43,14 @@ char comm[80], restartFile[80], logFile[80];
 int main(int argc, char const *argv[]) {
 
   MAXlevel = 10;
-  tmax = 2e0;
+  tmax = 3e0;
   We = 1e1; // We is 1 for 0.167 m/s <816*0.167^2*0.00075/0.017>
-  Ohd = 1e-2; // <0.000816/sqrt(816*0.017*0.00075) = 0.008>
+  Ohd = 1e1; // <0.000816/sqrt(816*0.017*0.00075) = 0.008>
+
   Ec = 1e0;
   De = 1e30;
-  Ohf = 1e0;
-  hf = 0.10;
+  Ohf = 1e-2;
+  hf = 1e0;
 
   if (hf == 0){
     fprintf(ferr, "We have a problem. Wrong code. Change code or film height.\n");
@@ -65,12 +66,13 @@ int main(int argc, char const *argv[]) {
   G1 = Ec/We; lambda1 = De*sqrt(We);
   
   rho2 = 1.0; mu2 = Ohf/sqrt(We);
-  G2 = 0.0; lambda2 = 0.0;
+  G2 = Ec/We; lambda2 = 1e30;
 
-  rho3 = 1e-3; mu3 = 1e-4/sqrt(We); // to run things fast for now, we are not using the right density and viscosity ratio. It is advisable to use the navier-stokes/conserving.h for the correct air-water density ratio -- #TODO: fixme for production runs. 
+  rho3 = 1e-2; mu3 = 1e-4/sqrt(We); // to run things fast for now, we are not using the right density and viscosity ratio. It is advisable to use the navier-stokes/conserving.h for the correct air-water density ratio -- #TODO: fixme for production runs. 
   G3 = 0.0; lambda3 = 0.0;
 
-  f1.sigma = 1e2/We; f2.sigma = 1.0/We;
+  f1.sigma = 1e1/We; // to enforce minimal deformation of the impactor
+  f2.sigma = 1e0/We;
 
   /*
   In the folder called "intermediate", we will store the snapshot files as the simulation progresses. See event: writingFiles.
@@ -91,7 +93,7 @@ int main(int argc, char const *argv[]) {
 }
 
 event init(t = 0){
-  if(!restore (file = "dump")){
+  if(!restore (file = restartFile)){
     refine((R2Drop(x,y,z) < 1.44) && (level < MAXlevel));
     fraction (f1, 1. - R2Drop(x,y,z));
     fraction (f2, -(x-1e-2));
